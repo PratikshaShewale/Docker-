@@ -1,0 +1,66 @@
+# Install and start Docker :
+sudo yum install docker
+sudo service docker start
+sudo service docker status
+
+ # Root user and pull nginx :
+sudo su
+docker pull nginx 
+
+ # Show containers :  (old command)
+docker ps      
+docker ps -a   
+
+ # Show containers :   (new command)
+docker container ls     
+docker container ls -a      
+
+ # Show list of images :
+docker images    
+docker image ls   
+
+ # Run command :
+ - docker run command is combination of docker pull , docker create , docker start .
+
+docker run nginx     ( runs nginx)
+docker run -d -p80:80 nginx    ( to run nginx in background )
+docker run -d -p80:80 --name mywebsite nginx ( to run docker in background on port 80 of ec2 and port 80 of docker  and give name to container )
+
+
+
+ # Create command:   
+ -docker create only creates container from image but the container is in stoped condition.
+
+docker create httpd
+docker start httpd    ( to start httpd)
+docker run -d -p80:80 --name mywebsite nginx   ( to create new container )
+
+ # To execute Container :
+docker exec -it containerid/name /bin/bash   
+
+
+ # Stop container :
+docker container stop containerid/name    
+docker stop $(docker ps -a)       
+
+ # Remove container:
+docker rm containerid/name   ( to remove one container )  
+docker rm $(docker ps -aq)      (to remove all stoped container which are stoped at once)
+
+ # Logs :
+docker logs containerid
+docker inspect containerid     (setting used to create container)
+
+ # Remove image :
+docker rmi imageid    ( remove one image  )
+docker image rm imageid     (remove one image )
+docker image prune   ( remove all unused images)
+
+# Types of Volume for Container :
+- one volume can be assigned to multiple container.
+1) Host path (Bind Mount ):
+2) Named Volume :
+3) Anonymous Volume : 
+
+ # Allocate CPU and memory to container :
+docker run --CPU 0.5 --memory 512mb -d 
